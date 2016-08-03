@@ -1,4 +1,4 @@
-#!d:\source_code\python\stepicwebproject\Scripts\python
+#!/usr/bin/env python
 import os
 import sys
 
