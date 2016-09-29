@@ -9,11 +9,24 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING)
     likes = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING)
+    QuestionManager = QuestionManager()
+    class Meta:
+        db_table = 'question'
 
+class QuestionManager(models.Manager):
+    
+    def new(self):
+        return Question.objects.order_by('-added_at')[:10]
+    
+    def popular():
+        return Question.objects.order_by('rating')
+    
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     question = models.OneToOneField(Question, null=False, on_delete=models.DO_NOTHING)
     author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING)
-    
+    class Meta:
+        db_table = 'answer'
+        
 class User(User)
