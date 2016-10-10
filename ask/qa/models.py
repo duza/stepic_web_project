@@ -21,7 +21,7 @@ class QuestionManager(models.Manager):
 # Create your models here.
 class Question(models.Model):
     title = models.CharField(max_length=50)
-    text = models.CharField(max_length=300)
+    text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING, related_name='author_of_question')
