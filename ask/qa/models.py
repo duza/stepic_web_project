@@ -21,7 +21,7 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING, related_name='author_of_question')
+    author = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING, related_name='author_of_question')
     likes = models.ManyToManyField(User, null=True, related_name='who_did_like')
     objects = QuestionManager()
     class Meta:
@@ -30,7 +30,7 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
-    question = models.OneToOneField(Question, null=False, on_delete=models.DO_NOTHING)
-    author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, null=False, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING)
     class Meta:
         db_table = 'answer'
