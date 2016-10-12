@@ -22,7 +22,7 @@ class Question(models.Model):
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.OneToOneField(User, null=False, on_delete=models.DO_NOTHING, related_name='author_of_question')
-    likes = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING, related_name='who_did_like')
+    likes = models.ManyToManyField(User, null=True, related_name='who_did_like')
     objects = QuestionManager()
     class Meta:
         db_table = 'question'
